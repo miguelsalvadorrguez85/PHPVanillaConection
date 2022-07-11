@@ -8,7 +8,7 @@
 
     <title>PHP Vanilla Connection</title>
 </head>
-<body>
+<body background="./medias/fondo.jpg" text="#000000">
     <h1 class="text-center">Mis últimas películas vistas</h1>
 
 
