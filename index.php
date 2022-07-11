@@ -9,7 +9,7 @@
     <title>PHP Vanilla Connection</title>
 </head>
 <body>
-    <h1>Mis últimas películas vistas</h1>
+    <h1 class="text-center">Mis últimas películas vistas</h1>
 
 
 <?php
@@ -17,16 +17,29 @@
 include "./database/openDatabase.php";
 
 
-$sql = "SELECT * FROM movies ORDER BY movies.id DESC";
+$sql = "SELECT * FROM movies ORDER BY movies.title DESC";
 $query = $conexion->prepare($sql);
 $query -> execute();
 $movies = $query ->fetchAll(PDO::FETCH_OBJ);
 
  if ($query -> rowCount() > 0) {
     foreach($movies as $movie) {
-        echo "{$movie->title}";
-    }
-}
+        echo <<<TAG
+            <article class="col-sm d-flex justify-content-around">
+                <div class="card text-center" style="width: 15rem">
+                    <img class="card-img-top" src="{$movie ->img}">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{$movie -> title}</h5>
+                        <h6 class="card-text">{$movie -> director}</h6>
+                        <p class="card-text">{$movie -> resume}</p> 
+                    
+                    </div>
+                </div>
+            </article>
+        TAG;
+    }    
+} 
 
 
 include "./database/closeDatabase.php";
